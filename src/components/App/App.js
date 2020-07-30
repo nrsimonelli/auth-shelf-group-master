@@ -15,7 +15,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
+import InfoPage from '../NewInfoPage/NewInfoPage';
 
 import './App.css';
 
