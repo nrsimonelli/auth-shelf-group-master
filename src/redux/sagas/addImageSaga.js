@@ -5,8 +5,8 @@ function* addImage(payload){
     try{
         yield console.log('this is inside of addImage saga, (payload)', payload.payload);
     }
-    catch{
-
+    catch (error) {
+        console.log('Error with user logout:', error);
     }
 }
 
