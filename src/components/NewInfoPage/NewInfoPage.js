@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 
@@ -9,16 +9,16 @@ import {connect} from 'react-redux';
 
 class NewInfoPage extends Component {
 
-    state = {
-        isFull: false
-    };
-
     componentDidMount() {
         this.props.dispatch({type: 'GET_ITEMS'});
     }
 
+    onDeleteClick = () => {
+        console.log('delete was clicked!');
+    }
+
     render(){
-        const isFull = this.state.isFull;
+
         return(
             <div className='tableMap'>
                 <table>
@@ -32,21 +32,24 @@ class NewInfoPage extends Component {
                     <th>
                         user
                     </th>
+                    <th>
+
+                    </th>
                 </tr>
                     <tbody>
-                        {isFull ? (
+                        {this.props.reduxState.REDUCERNAME !== [] ? (
                             this.props.reduxState.REDUCERNAME.map((item, index) => {
                                 return (
                                     <tr>
                                         <td><img src={item.image_url}/></td>
                                         <td>{item.description}</td>
                                         <td>{item.user_id}</td>
-                                        <td><button>Delete (not wired)</button></td>
+                                        <td><button onClick={this.onDeleteClick}>Delete (not wired)</button></td>
                                     </tr>
                                 )
                             })
                         ): (
-                            false
+                            <p>please wait</p>
                         )}
 
                     </tbody>
