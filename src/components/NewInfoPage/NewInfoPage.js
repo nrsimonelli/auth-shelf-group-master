@@ -10,11 +10,12 @@ import {connect} from 'react-redux';
 class NewInfoPage extends Component {
 
     componentDidMount() {
-        this.props.dispatch({type: 'GET_ITEMS'});
+        this.props.dispatch({type: 'FETCH_ITEM'});
     }
 
-    onDeleteClick = () => {
+    onDeleteClick = (event) => {
         console.log('delete was clicked!');
+        this.props.dispatch({type: 'DELETE_THIS', payload: event.target.value})
     }
 
     render(){
@@ -22,10 +23,11 @@ class NewInfoPage extends Component {
         return(
             <div className='tableMap'>
                 <table>
-                  <tr>
-                    <th>
+                  <thead>
+                    <tr>
+                    <td>
                         image
-                    </th>
+                    </td>
                     <th>
                         description
                     </th>
@@ -35,21 +37,23 @@ class NewInfoPage extends Component {
                     <th>
 
                     </th>
-                </tr>
+                    </tr>
+                  </thead>
+
                     <tbody>
-                        {this.props.reduxState.REDUCERNAME !== [] ? (
-                            this.props.reduxState.REDUCERNAME.map((item, index) => {
+                        {this.props.reduxState.item[0] !== undefined ? (
+                            this.props.reduxState.item.map((item, index) => {
                                 return (
-                                    <tr>
-                                        <td><img src={item.image_url}/></td>
+                                    <tr key={index}>
+                                        <td><img src={item.image_url} alt={item.description} /></td>
                                         <td>{item.description}</td>
                                         <td>{item.user_id}</td>
-                                        <td><button onClick={this.onDeleteClick}>Delete (not wired)</button></td>
+                                        <td><button onClick={this.onDeleteClick} value={item.id} >Delete</button></td>
                                     </tr>
                                 )
                             })
                         ): (
-                            <p>please wait</p>
+                            <div>please wait</div>
                         )}
 
                     </tbody>

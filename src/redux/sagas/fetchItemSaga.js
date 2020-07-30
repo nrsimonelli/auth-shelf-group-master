@@ -1,20 +1,21 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-function* addImage(payload){
+function* fetchAllItems(){
     try{
-        const response = yield axios.post('/api/shelf', payload.payload);
+        const response = yield axios.get('/api/shelf');
         yield console.log('response from /api/shelf post', response);
         //call refresh of Get Data list
-        yield put({ type: 'FETCH_ITEM' });
+        yield put({ type: 'SET_ITEM', payload: response });
+
     }
     catch (error) {
         console.log('Error with user logout:', error);
     }
 }
 
-function* addImageSaga() {
-    yield takeLatest('ADD_IMAGE', addImage);
+function* fetchItemSaga() {
+    yield takeLatest('FETCH_ITEM', fetchAllItems);
 }
 
-  export default addImageSaga;
+  export default fetchItemSaga;

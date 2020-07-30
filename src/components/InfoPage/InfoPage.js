@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import NewInfoPage from '../NewInfoPage/NewInfoPage';
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
 // It doesn't dispatch any redux actions or display any part of redux state
@@ -27,7 +28,7 @@ class InfoPage extends Component{
   onUrlChange = (event) => {
     this.setState({
       image_url: event.target.value
-    });  
+    });
   }
 
   render(){
@@ -45,6 +46,8 @@ class InfoPage extends Component{
           <br/>
           <button onClick={this.addImage}>Add Image To Shelf</button>
         </div>
+
+        <NewInfoPage />
       </div>
     )
   }
