@@ -3,7 +3,9 @@ import axios from 'axios';
 
 function* addImage(payload){
     try{
-        yield console.log('this is inside of addImage saga, (payload)', payload.payload);
+        const response = yield axios.post('/api/shelf', payload.payload);
+        yield console.log('response from /api/shelf post', response);
+        //call refresh of Get Data list
     }
     catch (error) {
         console.log('Error with user logout:', error);
